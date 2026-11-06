@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🔥 Priyam Fataka Shop | Diwali Spin & Win</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=Yatra+One&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated Background Fireworks Canvas -->
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="stars-bg"></div>
+  <div class="diwali-glow-mesh"></div>
+
+  <!-- Top Utilities Bar -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <span class="sparkle-icon">✨</span>
+      <span class="festival-tag">SHUBH DIWALI DHAMAKA</span>
+    </div>
+    <div class="nav-controls">
+      <button id="soundToggleBtn" class="pill-btn" title="Toggle Sound FX">
+        <span class="btn-icon">🔊</span>
+        <span class="btn-text">Sound ON</span>
+      </button>
+      <button id="musicToggleBtn" class="pill-btn" title="Toggle Festive BGM">
+        <span class="btn-icon">🎵</span>
+        <span class="btn-text">Music OFF</span>
+      </button>
+      <button id="adminBtn" class="pill-btn admin-pill" title="Shop Owner Settings">
+        <span class="btn-icon">⚙️</span>
+        <span class="btn-text">Owner Settings</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Showcase Container -->
+  <main class="main-wrapper">
+    <!-- Header Section -->
+    <section class="shop-hero">
+      <div class="diya-decor left-diya">🪔</div>
+      <div class="hero-content">
+        <div class="shop-badge">
+          <span class="badge-spark">💥</span>
+          <span class="badge-text">BEST CRACKERS & FIREWORKS IN TOWN</span>
+          <span class="badge-spark">💥</span>
+        </div>
+        <h1 class="shop-title">
+          <span class="gold-gradient-text">🔥 PRIYAM FATAKA SHOP 🔥</span>
+        </h1>
+        <div class="sub-banner">
+          <span class="glow-accent">⚡</span>
+          <span class="tagline">SPIN & WIN • TRY YOUR LUCK & WIN EXCITING PRIZES!</span>
+          <span class="glow-accent">⚡</span>
+        </div>
+        <p class="hero-desc">
+          Spin the festive wheel of fortune to win premium cracker boxes, mega discounts up to 90%, and free shots!
+        </p>
+      </div>
+      <div class="diya-decor right-diya">🪔</div>
+    </section>
+
+    <!-- Stats & Live Ticker Strip -->
+    <div class="live-stats-bar">
+      <div class="stat-item">
+        <span class="stat-icon">🎯</span>
+        <span class="stat-label">Total Spins:</span>
+        <span class="stat-val" id="totalSpinsCount">0</span>
+      </div>
+      <div class="stat-divider">|</div>
+      <div class="stat-item">
+        <span class="stat-icon">🎁</span>
+        <span class="stat-label">Prizes Available:</span>
+        <span class="stat-val" id="activePrizesCount">14</span>
+      </div>
+      <div class="stat-divider">|</div>
+      <div class="stat-item ticker-item">
+        <span class="stat-icon">🔔</span>
+        <div class="ticker-content" id="liveTicker">
+          <span>Ramesh won Shaktimaan Bomb! • Priya claimed 20% OFF! • Amit won Anar! • Rahul won Murga Bomb!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spin Wheel Arena -->
+    <section class="wheel-arena">
+      <div class="wheel-stage">
+        <!-- Floating Fireworks Sparkles -->
+        <div class="spark-fx s1">✨</div>
+        <div class="spark-fx s2">🎆</div>
+        <div class="spark-fx s3">🎇</div>
+        <div class="spark-fx s4">💥</div>
+
+        <!-- Wheel Outer Glow & Casino Marquee Border -->
+        <div class="marquee-ring" id="marqueeRing">
+          <!-- Light bulbs dynamically inserted or styled in CSS -->
+          <div class="bulb-container" id="bulbContainer"></div>
+
+          <!-- Pointer Needle Indicator (Points to Winning Segment) -->
+          <div class="pointer-wrapper" id="pointerWrapper">
+            <div class="pointer-shadow"></div>
+            <div class="wheel-pointer" id="wheelPointer">
+              <div class="pointer-gem"></div>
+              <div class="pointer-needle"></div>
+            </div>
+          </div>
+
+          <!-- The HTML5 Wheel Canvas -->
+          <div class="canvas-holder">
+            <canvas id="wheelCanvas" width="800" height="800"></canvas>
+            
+            <!-- Center Spin Hub Button -->
+            <button id="spinBtn" class="spin-hub-btn" aria-label="Spin Wheel">
+              <div class="hub-ring-glow"></div>
+              <div class="hub-inner">
+                <span class="hub-fire">🔥</span>
+                <span class="hub-text">SPIN</span>
+                <span class="hub-sub">NOW</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action / Probability Disclaimer -->
+      <div class="spin-footer-bar">
+        <button id="quickSpinBtn" class="primary-spin-btn">
+          <span class="btn-sparkle">🎇</span>
+          <span>SPIN THE WHEEL</span>
+          <span class="btn-sparkle">🎇</span>
+        </button>
+        <p class="fair-play-note">
+          🔒 100% Genuine Certified Random Selection • Claim instantly at store
+        </p>
+      </div>
+    </section>
+
+    <!-- Recent Lucky Winners Strip -->
+    <section class="recent-winners-section">
+      <div class="section-heading">
+        <span class="ornament">❖</span>
+        <h3>Recent Lucky Winners</h3>
+        <span class="ornament">❖</span>
+      </div>
+      <div class="winners-cards-grid" id="recentWinnersList">
+        <!-- Populated via script.js from localStorage -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="shop-footer">
+    <div class="footer-decor">🪔 💥 🎆 🪔</div>
+    <p class="footer-title">🔥 PRIYAM FATAKA SHOP 🔥</p>
+    <p class="footer-subtitle">Wholesale & Retail Diwali Fireworks Superstore</p>
+    <p class="footer-address">📍 Main Market Road, Near Clock Tower • Contact: +91 98765 43210</p>
+    <p class="footer-copy">© 2026 Priyam Fataka Shop. All rights reserved. Celebrate Safe & Green Diwali!</p>
+  </footer>
+
+  <!-- WINNER CELEBRATION MODAL POPUP -->
+  <div class="modal-overlay" id="winnerModal">
+    <div class="modal-backdrop-blur"></div>
+    <div class="winner-modal-card">
+      <div class="modal-corner c-tl"></div>
+      <div class="modal-corner c-tr"></div>
+      <div class="modal-corner c-bl"></div>
+      <div class="modal-corner c-br"></div>
+
+      <div class="winner-badge">
+        <span class="wb-star">🌟</span>
+        <span>PRIZE WON!</span>
+        <span class="wb-star">🌟</span>
+      </div>
+
+      <h2 class="congrats-title">🎉 CONGRATULATIONS! 🎉</h2>
+      <p class="you-won-intro">You Have Won An Exclusive Diwali Reward:</p>
+
+      <div class="winning-prize-box" id="winningPrizeBox">
+        <div class="prize-emoji-huge" id="modalPrizeEmoji">🎆</div>
+        <div class="prize-name-huge" id="modalPrizeName">Shaktimaan Bomb</div>
+        <div class="prize-category-tag" id="modalPrizeTag">Premium Cracker Box</div>
+      </div>
+
+      <!-- Voucher Ticket Box -->
+      <div class="voucher-box">
+        <div class="voucher-left">
+          <span class="v-label">CLAIM COUPON CODE</span>
+          <span class="v-code" id="modalVoucherCode">PFS-8924-BOMB</span>
+        </div>
+        <button id="copyCodeBtn" class="copy-btn" title="Copy Coupon Code">
+          📋 Copy
+        </button>
+      </div>
+
+      <p class="claim-instruction">
+        Visit <strong>Priyam Fataka Shop</strong> to Claim Your Prize!<br>
+        <span class="sub-instruct">Show this digital coupon screen or code at the cash billing counter.</span>
+      </p>
+
+      <div class="modal-actions">
+        <button id="downloadTicketBtn" class="modal-btn ticket-btn" title="Save or Print Voucher">
+          <span>🎟️ Download Voucher</span>
+        </button>
+        <button id="playAgainBtn" class="modal-btn play-again-btn">
+          <span>🔄 Spin Again</span>
+        </button>
+        <button id="closeModalBtn" class="modal-btn close-claim-btn">
+          <span>✨ Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN SECURITY PIN MODAL -->
+  <div class="modal-overlay" id="adminPinModal">
+    <div class="modal-backdrop-blur"></div>
+    <div class="pin-modal-card">
+      <div class="pin-header">
+        <span class="pin-lock-icon">🔐</span>
+        <h3>Owner Security Check</h3>
+        <p class="pin-hint">Enter your 4-digit PIN to access prize probabilities & admin settings.</p>
+      </div>
+      <div class="pin-input-wrap">
+        <input type="password" id="adminPinInput" maxlength="6" class="pin-box" placeholder="••••" autocomplete="off">
+      </div>
+      <div id="pinErrorMsg" class="pin-error"></div>
+      <div class="pin-actions">
+        <button id="cancelPinBtn" class="modal-btn play-again-btn">Cancel</button>
+        <button id="submitPinBtn" class="modal-btn close-claim-btn">Unlock</button>
+      </div>
+      <p class="pin-default-note">Default PIN: <strong>1234</strong> (Can be customized in settings)</p>
+    </div>
+  </div>
+
+  <!-- SHOP OWNER / ADMIN SETTINGS MODAL -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-backdrop-blur"></div>
+    <div class="admin-modal-card">
+      <div class="admin-header">
+        <div class="admin-title-area">
+          <span class="admin-icon">⚙️</span>
+          <div>
+            <h3>Shop Owner Control Panel</h3>
+            <p class="admin-sub">Prize Management & Fair-Play Probability Configuration</p>
+          </div>
+        </div>
+        <button id="closeAdminBtn" class="admin-close-btn" aria-label="Close Admin Modal">✕</button>
+      </div>
+
+      <!-- Admin Tab Switcher -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="prizesTab">🎁 Prize & Probabilities</button>
+        <button class="tab-btn" data-tab="historyTab">📜 Spin History Logs</button>
+        <button class="tab-btn" data-tab="quickConfigTab">⚡ Quick Settings</button>
+      </div>
+
+      <!-- Tab 1: Prizes & Probability Editor -->
+      <div class="tab-pane active" id="prizesTab">
+        <div class="table-info-bar">
+          <span>Configure winning probabilities for each segment. Weights dynamically calculate true winning percentages.</span>
+          <button id="resetDefaultsBtn" class="small-danger-btn">↺ Reset to Factory Defaults</button>
+        </div>
+
+        <div class="prize-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th style="width: 50px;">Status</th>
+                <th style="width: 60px;">Icon</th>
+                <th>Prize Name</th>
+                <th style="width: 140px;">Weight (Odds)</th>
+                <th style="width: 90px;">Win Chance</th>
+                <th style="width: 130px;">Prize Category</th>
+              </tr>
+            </thead>
+            <tbody id="adminPrizesTableBody">
+              <!-- Dynamically populated by script.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admin-actions-bar">
+          <div class="weight-summary">
+            <span>Total Weight: <strong id="totalWeightDisplay">100</strong></span>
+            <span class="active-count-tag">Active Slices: <strong id="activeSlicesCount">14</strong></span>
+          </div>
+          <button id="savePrizesBtn" class="save-admin-btn">💾 Save & Apply to Wheel</button>
+        </div>
+      </div>
+
+      <!-- Tab 2: Spin History Logs -->
+      <div class="tab-pane" id="historyTab">
+        <!-- Live Voucher Verification Tool for Billing Counter -->
+        <div class="voucher-verify-card">
+          <div class="vvc-title">🔍 Quick Voucher Verification & Redemption</div>
+          <div class="vvc-row">
+            <input type="text" id="verifyCodeInput" class="form-input" placeholder="Enter Coupon Code (e.g. PFS-8X4D-BOMB)">
+            <button id="verifyRedeemBtn" class="save-admin-btn">Verify & Redeem</button>
+          </div>
+          <div id="verifyResultMsg" class="verify-feedback"></div>
+        </div>
+
+        <div class="table-info-bar">
+          <span>All spins recorded locally with unique voucher codes and timestamps.</span>
+          <div class="history-btn-group">
+            <button id="exportCsvBtn" class="small-action-btn">📥 Export CSV</button>
+            <button id="clearHistoryBtn" class="small-danger-btn">🗑️ Clear History</button>
+          </div>
+        </div>
+
+        <div class="prize-table-wrap history-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Timestamp</th>
+                <th>Prize Won</th>
+                <th>Coupon Code</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminHistoryTableBody">
+              <!-- Dynamically populated by script.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Quick Settings -->
+      <div class="tab-pane" id="quickConfigTab">
+        <div class="quick-settings-grid">
+          <div class="config-card">
+            <h4>🏪 Store Name Display</h4>
+            <div class="input-row">
+              <input type="text" id="configStoreName" class="form-input" value="Priyam Fataka Shop">
+              <button id="saveStoreNameBtn" class="small-action-btn">Update</button>
+            </div>
+            <p class="config-hint">Updates the main store title across banner, voucher, and claim screens.</p>
+          </div>
+
+          <div class="config-card">
+            <h4>⏱️ Wheel Spin Duration</h4>
+            <div class="input-row">
+              <select id="configSpinDuration" class="form-input">
+                <option value="5000">5 Seconds (Standard)</option>
+                <option value="6000" selected>6 Seconds (Recommended)</option>
+                <option value="7000">7 Seconds (Thrilling Tension)</option>
+              </select>
+            </div>
+            <p class="config-hint">Controls how long the wheel rotates before coming to a complete stop.</p>
+          </div>
+
+          <div class="config-card">
+            <h4>🎉 Visual Effects</h4>
+            <div class="toggle-row">
+              <label class="switch-label">
+                <input type="checkbox" id="configFireworksBg" checked>
+                <span>Continuous Ambient Fireworks</span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <label class="switch-label">
+                <input type="checkbox" id="configMarqueeLights" checked>
+                <span>Casino Bulb Animation</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="config-card">
+            <h4>🔐 Owner Security PIN</h4>
+            <div class="input-row">
+              <input type="password" id="configNewPin" class="form-input" placeholder="Enter new 4-digit PIN" maxlength="6">
+              <button id="savePinBtn" class="small-action-btn">Update PIN</button>
+            </div>
+            <p class="config-hint">Protects the admin settings panel from customer access.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Confetti Canvas for Grand Wins -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
