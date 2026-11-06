@@ -45,3 +45,4 @@ Just open `index.html` in any web browser.
 
 ## 🪔 Developed For
 **Priyam Fataka Shop** — Wholesale & Retail Diwali Fireworks Superstore.
+
